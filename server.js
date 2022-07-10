@@ -1,13 +1,12 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const { domainToASCII } = require('url')
 const MongoClient = require('mongodb').MongoClient
-require ('dotenv').config()
+require('dotenv').config()
 
-let db,
+let db, 
     dbConnectionString = process.env.DB_STRING,
-    dbName = 'beachwood'
+    dbName = 'beachwood',
     collection 
 
 MongoClient.connect(dbConnectionString)
@@ -16,3 +15,8 @@ MongoClient.connect(dbConnectionString)
         db = client.db(dbName)
         collection = db.collection('employee_info')
     })
+
+    
+app.listen(process.env.PORT || PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
+})
